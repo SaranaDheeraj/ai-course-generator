@@ -13,35 +13,29 @@ const Navbar = async (props: Props) => {
     const session=await getAuthSession()
     console.log(session)
   return (
-    <nav className='fixed inset-x-0 top-0 bg-white dark:bg-gray-950 z-[10] h-fit border-b border-zinc-300 py-2'>
-        <div className="flex items-center justify-center h-full gap-2 px-8 mx-auto sm:justify-between max-w-7xl">
-            <Link href='/gallery' className="items-center hidden gap-2 sm:flex">
-                <p className="rounded-lg border-2 border-b-4 border-r-4 border-black px-2 py-1 text-xl font-bold transition-all hover:-translate-y-[2px] md:block dark:border-white">
-                Learning Journey
-                </p>
-            </Link>
-            <div className='flex items-center'>
-                <Link href='/gallery' className='mr-3'>
-                    Gallery
-                </Link>
-                {session?.user && (
-                    <>
-                        <Link href="/create" className="mr-3">
-                            Create Course
-                        </Link>
-                        <Link href="/create" className="mr-3">
-                            Settings
-                        </Link>
-                    </>
-                    
-                )}
-                <ThemeToggle className='mr-3' />
-                <div className='flex items-center'>
-                    {session?.user ? <UserAccountNav user={session.user}/>:<SignInButton/>}
-                </div>
-            </div>
-        </div>
-    </nav>
+    <nav className="fixed inset-x-0 top-0 z-10 h-fit flex items-center justify-between px-8 py-3 mx-auto max-w-7xl bg-gradient-to-r from-indigo-500 to-purple-600 shadow-md">
+  <Link href="/gallery" className="text-xl font-bold text-white hover:text-opacity-75">
+    Learning Journey
+  </Link>
+  <div className="flex items-center space-x-4">
+    <Link href="/gallery" className="text-white hover:text-opacity-75">Gallery</Link>
+    {session?.user && (
+      <>
+        <Link href="/create" className="text-white hover:text-opacity-75">Create Course</Link>
+        <Link href="/create" className="text-white hover:text-opacity-75">Settings</Link>
+      </>
+    )}
+    <ThemeToggle className="text-white hover:text-opacity-75" />
+    <div className="flex items-center">
+      {session?.user ? (
+        <UserAccountNav user={session.user} />
+      ) : (
+        <SignInButton />
+      )}
+    </div>
+  </div>
+</nav>
+
 
   )
 }

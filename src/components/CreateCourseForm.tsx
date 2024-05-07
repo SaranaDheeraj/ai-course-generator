@@ -70,7 +70,7 @@ const CreateCourseForm = (props: Props) => {
   form.watch();
 
   return (
-    <div className="w-full">
+    <div className="w-9/12">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="w-full mt-4">
           <FormField
@@ -79,10 +79,11 @@ const CreateCourseForm = (props: Props) => {
             render={({ field }) => {
               return (
                 <FormItem className="flex flex-col items-start w-full sm:items-center flex-row">
-                  <FormLabel className="flex-[1] text-xl">Title</FormLabel>
+                  <FormLabel className="flex-[1] text-xl">Main Topic:</FormLabel>
                   <FormControl className="flex-[6]">
                     <Input
-                      placeholder="Enter the main topic of the course"
+                      className="bg-gray-50"
+                      placeholder="Enter the topic and subtopic for the course"
                       {...field}
                     />
                   </FormControl>
@@ -111,10 +112,10 @@ const CreateCourseForm = (props: Props) => {
                       return (
                         <FormItem className="flex flex-col items-start w-full sm:items-center sm:flex-row">
                           <FormLabel className="flex-[1] text-xl">
-                            Unit {index + 1}
+                            Sub Topic {index + 1}: 
                           </FormLabel>
                           <FormControl className="flex-[6]">
-                            <Input
+                            <Input className="bg-gray-50"
                               placeholder="Enter subtopic of the course"
                               {...field}
                             />

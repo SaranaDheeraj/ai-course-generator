@@ -11,20 +11,23 @@ const CreatePage = async (props: Props) => {
     return redirect("/gallery");
   }
   return (
-    <div className="flex flex-col items-start max-w-xl px-8 mx-auto my-16 sm:px-0">
-      <h1 className="self-center text-xl font-bold text-center sm:text-4xl">
-        LearnGenius
-      </h1>
-      <div className="flex p-4 mt-5 border-none bg-secondary">
-        <InfoIcon className="w-12 h-12 mr-3 text-blue-400" />
-        <div>
-          Enter in a course title, or what you want to learn about. Then enter a
-          list of sub-topics which are the specifics you want to learn. And our
-          AI will generate a course for you!
-        </div>
-      </div>
-      <CreateCourseForm />
-    </div>
+    <section className="mx-auto mt-8 max-w-7xl py-12 px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-8 rounded-lg shadow-lg bg-orange-200 ">
+  <h2 className="text-4xl font-bold tracking-wide uppercase">
+    Unleash Your Learning Potential
+  </h2>
+  <p className="text-xl leading-relaxed text-center opacity-75">
+    Ignite your thirst for knowledge with our cutting-edge course creation platform.
+  </p>
+  <div className="flex justify-center gap-4">
+    <button className="px-6 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 hover:bg-opacity-75 text-lg font-bold rounded-md">
+      Embark on Your Learning Adventure
+    </button>
+    <button className="px-6 py-2 border border-indigo-900 hover:border-opacity-75 text-lg font-bold rounded-md">
+      Explore Inspiration
+    </button>
+  </div>
+  <CreateCourseForm />
+</section>
   );
 };
 
