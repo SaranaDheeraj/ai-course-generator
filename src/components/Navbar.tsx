@@ -1,60 +1,49 @@
-import React from "react";
-import { getAuthSession } from "@/lib/auth";
-import UserAccountNav from "./UserAccountNav";
-import { ThemeToggle } from "./ThemeToggle";
-import Link from "next/link";
-import SignInButton from "./SignInButton";
-import { Box, Button, Container, Flex, Spacer } from "@chakra-ui/react";
-import LogOutButton from "./LogOutButton";
-import SideDrawer from "./SideDrawer";
 
-const Navbar = async () => {
-  const session = await getAuthSession();
+import React from 'react'
 
+import SignInButton from './SignInButton'
+import { getAuthSession } from '@/lib/auth'
+import UserAccountNav from './UserAccountNav'
+import { ThemeToggle } from './ThemeToggle'
+import Link from 'next/link'
+
+type Props = {}
+
+const Navbar = async (props: Props) => {
+    const session=await getAuthSession()
+    console.log(session)
   return (
-    <>
-      <Box
-        bgColor="blue.200"
-        as="nav"
-        color="gray.200"
-        fontWeight="bold"
-        fontSize="xl"
-        py={3}
-      >
-        <Container maxW="1400px" mx="auto">
-          <Flex alignItems="center">
-            <Link href="/">Learn Genius</Link>
+    <nav className='fixed inset-x-0 top-0 bg-white dark:bg-gray-950 z-[10] h-fit border-b border-zinc-300 py-2'>
+        <div className="flex items-center justify-center h-full gap-2 px-8 mx-auto sm:justify-between max-w-7xl">
+            <Link href='/gallery' className="items-center hidden gap-2 sm:flex">
+                <p className="rounded-lg border-2 border-b-4 border-r-4 border-black px-2 py-1 text-xl font-bold transition-all hover:-translate-y-[2px] md:block dark:border-white">
+                Learning Journey
+                </p>
+            </Link>
+            <div className='flex items-center'>
+                <Link href='/gallery' className='mr-3'>
+                    Gallery
+                </Link>
+                {session?.user && (
+                    <>
+                        <Link href="/create" className="mr-3">
+                            Create Course
+                        </Link>
+                        <Link href="/create" className="mr-3">
+                            Settings
+                        </Link>
+                    </>
+                    
+                )}
+                <ThemeToggle className='mr-3' />
+                <div className='flex items-center'>
+                    {session?.user ? <UserAccountNav user={session.user}/>:<SignInButton/>}
+                </div>
+            </div>
+        </div>
+    </nav>
 
-            <Spacer />
-            <Flex
-              display={{ base: "none", md: "flex" }}
-              gap={5}
-              alignItems="center"
-            >
-              {session?.user ? (
-                <>
-                  <Link href="/gallery">Browse Courses</Link>
-                  <Link href="/create">Create Course</Link>
-                  <Link href="/settings">Settings</Link>
-                  <LogOutButton />
-                </>
-              ) : (
-                <Link href="/"></Link>
-              )}
-              {session?.user ? (
-                <UserAccountNav user={session.user} />
-              ) : (
-                <SignInButton />
-              )}
-            </Flex>
-            <Box display={{ base: "block", md: "none" }}>
-              <SideDrawer session={session} />
-            </Box>
-          </Flex>
-        </Container>
-      </Box>
-    </>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

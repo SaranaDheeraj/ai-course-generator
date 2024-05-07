@@ -32,9 +32,7 @@ const ChapterCard = React.forwardRef<ChapterCardHandler, Props>(
     });
 
     const addChapterIdToSet = React.useCallback(() => {
-      // const newSet=new Set(completedChapters);
-      // newSet.add(chapter.id);
-      // setCompletedChapters(newSet)
+      
       setCompletedChapters((prev) => {
         const newSet = new Set(prev);
         newSet.add(chapter.id);

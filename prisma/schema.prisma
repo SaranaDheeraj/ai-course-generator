@@ -1,12 +1,18 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+
 generator client {
   provider = "prisma-client-js"
 }
-
+ 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
-
+ 
+// Updated Account model with unique index name for userId
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -21,21 +27,22 @@ model Account {
   id_token          String? @db.Text
   session_state     String?
   user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId], name: "accountUserIdIndex") // Unique index name for userId
 
-  @@index([userId], name: "Account_userId_index")  // Updated index name
   @@unique([provider, providerAccountId])
 }
- 
+
+// Updated Session model with unique index name for userId
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId], name: "Session_userId_index")  // Updated index name
+  @@index([userId], name: "sessionUserIdIndex") // Unique index name for userId
 }
- 
+
+// Updated User model with unique index name for email
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -45,26 +52,28 @@ model User {
   credits       Int       @default(10)
   accounts      Account[]
   sessions      Session[]
+
+  @@index([email], name: "userEmailIndex") // Unique index name for email
 }
 
 
-model Course {
-  id     String    @id @default(cuid())
-  name   String
-  image  String
-  units  Unit[]
+model Course{
+  id            String    @id @default(cuid())
+  name          String
+  image         String
+  units         Unit[]
 }
 
-model Unit {
-  id       String    @id @default(cuid())
-  courseId String
-  name     String
-  course   Course    @relation(fields: [courseId], references: [id])
-  chapters Chapter[]
-
-  @@index([courseId], name: "Unit_courseId_index")  // Updated index name
+model Unit{
+  id            String    @id @default(cuid())
+  courseId      String
+  name          String
+  course        Course    @relation(fields: [courseId], references:[id])
+  chapters      Chapter[]
+  @@index([courseId], name:"courseId")
 }
 
+// Updated Chapter model with opposite relation to Question
 model Chapter {
   id                 String    @id @default(cuid())
   unitId             String
@@ -73,6 +82,19 @@ model Chapter {
   videoId            String?
   summary            String?   @db.VarChar(3000)
   unit               Unit      @relation(fields: [unitId], references: [id])
+  questions          Question[] // Define the opposite relation field
 
-  @@index([unitId], name: "Chapter_unitId_index")  // Updated index name
+  @@index([unitId], name: "unitId")
+}
+
+// Updated Question model with relation and index
+model Question {
+  id                String    @id @default(cuid())
+  chapterId         String
+  question          String    @db.VarChar(3000)
+  answer            String    @db.VarChar(3000)
+  options           String    @db.VarChar(3000)
+  chapter           Chapter   @relation(fields: [chapterId], references: [id])
+
+  @@index([chapterId], name: "chapterId")
 }

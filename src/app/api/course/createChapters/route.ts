@@ -19,9 +19,9 @@ export async function POST(req: Request, res: Response) {
     }[];
 
     let output_units: outputUnits = await strict_output(
-      `You are an AI capable of curating course content, coming up with relevant chapter titles for the given units: ${units} , and finding relevant youtube videos for each chapter in valid JSON format.`,
+      `You are an AI capable of curating course content, coming up with relevant chapter titles for the given units: ${units} , and finding relevant youtube videos for each chapter in valid JSON format. `,
       new Array(units.length).fill(
-        `It is your job to create a course about ${title}. The user has requested to create chapters for each of the units. Then, for each chapter, provide a detailed youtube search query that can be used to find an informative educational vidoe for each chapter. Each query should give an educational informative course in youtube.`
+        `It is your job to create a course about ${title}. The user has requested to create chapters for each of the units. Then, for each chapter, provide a detailed youtube search query that can be used to find an informative educational vidoe for each chapter. Each query should give an educational informative course in youtube. In valid JSON format`
       ),
       {
         title: "title of the unit",
@@ -29,6 +29,7 @@ export async function POST(req: Request, res: Response) {
           "generate an array of chapters as required, each chapter should have a youtube_search_query and a chapter_title key in the JSON object",
       }
     );
+    console.log(output_units);
 
     const imageSearchTerm = await strict_output(
       "you are an AI capable of finding the most relevant image for a course",
@@ -49,7 +50,6 @@ export async function POST(req: Request, res: Response) {
       },
     });
 
-    console.log(output_units);
 
     for (const unit of output_units) {
       const unitTitle = unit.title;
@@ -70,7 +70,7 @@ export async function POST(req: Request, res: Response) {
     }
     return NextResponse.json({ course_id: course.id });
   } catch (error) {
-    console.error("Error occurred:", error);
+    console.error("Error occurred:", error.response);
     if (error instanceof ZodError) {
       return new NextResponse("Invalid request body", { status: 400 });
     } else {
