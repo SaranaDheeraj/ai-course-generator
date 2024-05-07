@@ -97,19 +97,5 @@ const ConfirmChapters = ({course}: Props) => {
         </div>
         </div>
   )}
-    
-  
-    
-    
-
-        
-    
-
-
-
-  
-
-  
-
 
 export default ConfirmChapters;
