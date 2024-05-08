@@ -47,7 +47,7 @@ const ConfirmChapters = ({course}: Props) => {
                 <h3 className="text-2xl font-bold">
                     {unit.name}
                 </h3>
-                <div className='mt-3'>
+                <div className='mt-3 grid gap-4 grid-cols-3'>
                     {unit.chapters.map((chapter, chapterIndex)=>{
                         return (<ChapterCard 
                             completedChapters={completedChapters}
