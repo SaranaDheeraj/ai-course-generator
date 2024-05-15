@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import {Chapter,Course,Unit} from "@prisma/client";
-import ChapterCard, { ChapterCardHandler } from './ChapterCard';
+import ChapterCard, { ChapterCardHandler } from './ChapterCardForm';
 import { Separator } from './ui/separator';
 import { Button, buttonVariants } from './ui/button';
 import Link from 'next/link';

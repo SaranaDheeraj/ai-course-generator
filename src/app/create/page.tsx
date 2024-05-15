@@ -11,7 +11,7 @@ const CreatePage = async (props: Props) => {
     return redirect("/gallery");
   }
   return (
-    <section className="mx-auto mt-8 max-w-7xl py-12 px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-8 rounded-lg shadow-lg bg-orange-200 ">
+    <section className="h-screen mx-auto pt-6 max-w-7xl py-12 px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-8 ">
   <h2 className="text-4xl font-bold tracking-wide uppercase">
     Unleash Your Learning Potential
   </h2>

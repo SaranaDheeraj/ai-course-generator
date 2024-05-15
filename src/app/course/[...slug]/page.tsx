@@ -1,4 +1,4 @@
-import CourseSideBar from '@/components/CourseSideBar'
+import CourseSideBar from '@/components/CourseSideBarComponent'
 import MainVideoSummary from '@/components/MainVideoSummary'
 import QuizCards from '@/components/QuizCards'
 import { prisma } from "@/lib/db"
@@ -45,7 +45,7 @@ const nextChapter=unit.chapters[chapterIndex+1]
 const prevChapter=unit.chapters[chapterIndex-1]
     return (
         
-        <div className='mx-auto max-w-2xl'>
+        <div className=' py-7 mx-auto max-w-2xl'>
             <div>
         <CourseSideBar course={course} currentChapterId={chapter.id}/>
         </div>

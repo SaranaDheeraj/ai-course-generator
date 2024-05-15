@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(
-        lexend.className,'antialised min-h-screen pt-16'
+        lexend.className,'antialised min-h-screen pt-16 bg-orange-200'
       )}>
         <Provider>
           

@@ -1,4 +1,4 @@
-import ConfirmChapters from "@/components/ConfirmChapters";
+import ConfirmChapters from "@/components/ConfirmChaptersComponent";
 import { getAuthSession } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { Info } from "lucide-react";
